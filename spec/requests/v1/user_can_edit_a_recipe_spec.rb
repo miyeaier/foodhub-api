@@ -1,16 +1,10 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Update specific recipe' do
-  let!(:creator) { create(:user) }
-  let(:creator_credentials) { creator.create_new_auth_token }
-  let!(:creator_headers) do
-    { HTTP_ACCEPT: 'application/json' }.merge!(creator_credentials)
-  end
-  let!(:potential_editor) { create(:user) }
-  let(:potential_editor_credentials) { potential_editor.create_new_auth_token }
-  let!(:potential_editor_headers) do
-    { HTTP_ACCEPT: 'application/json' }.merge!(potential_editor_credentials)
-  end
+RSpec.describe 'Update specific recipe' , type: :request do
+  let(:user) { create(:user) }
+  let(:user_credentials) { user.create_new_auth_token }
+  let!(:valid_headers) { { HTTP_ACCEPT: 'application/json' }.merge!(user_credentials) }
+
   let(:recipe) do
     create(:recipe,
            title: 'Cookies',
